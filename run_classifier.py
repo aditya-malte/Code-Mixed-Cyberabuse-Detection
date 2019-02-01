@@ -341,7 +341,7 @@ class MrpcProcessor(DataProcessor):
       examples.append(
           InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
     return examples
-
+##########################################################################
 #We have modified the ColaProcessor 
 class TracProcessor(DataProcessor):
   """Processor for the CoLA data set (GLUE version)."""
@@ -375,7 +375,7 @@ class TracProcessor(DataProcessor):
       guid = "%s-%s" % (set_type, i)
       if set_type == "test":
         text_a = tokenization.convert_to_unicode(line[1])
-        label = "0"
+        label = "NAG"
       else:
         text_a = tokenization.convert_to_unicode(line[1])
         label = tokenization.convert_to_unicode(line[2])
@@ -383,7 +383,7 @@ class TracProcessor(DataProcessor):
           InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
     return examples
     
-
+###############################################################################
 
 class ColaProcessor(DataProcessor):
   """Processor for the CoLA data set (GLUE version)."""
