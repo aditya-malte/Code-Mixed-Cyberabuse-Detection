@@ -18,9 +18,9 @@ from __future__ import print_function
 
 import os
 import tempfile
+import tokenization
 import six
 import tensorflow as tf
-import tokenization
 
 
 class TokenizationTest(tf.test.TestCase):
@@ -121,6 +121,7 @@ class TokenizationTest(tf.test.TestCase):
     self.assertFalse(tokenization._is_control(u" "))
     self.assertFalse(tokenization._is_control(u"\t"))
     self.assertFalse(tokenization._is_control(u"\r"))
+    self.assertFalse(tokenization._is_control(u"\U0001F4A9"))
 
   def test_is_punctuation(self):
     self.assertTrue(tokenization._is_punctuation(u"-"))

@@ -25,6 +25,7 @@ import modeling
 import optimization
 import tokenization
 import tensorflow as tf
+from sklearn.metrics import confusion_matrix
 
 flags = tf.flags
 
@@ -204,10 +205,10 @@ class DataProcessor(object):
       return lines
 
   @classmethod
-  def _read_csv(cls, input_file, quotechar=None):
+  def _read_csv(cls, input_file, quotechar='"'):
     """Reads a tab separated value file."""
     with tf.gfile.Open(input_file, "r") as f:
-      reader = csv.reader(f, quotechar=quotechar)
+      reader = csv.reader(f, delimiter=",", quotechar=quotechar)
       lines = []
       for line in reader:
         lines.append(line)
@@ -341,49 +342,7 @@ class MrpcProcessor(DataProcessor):
       examples.append(
           InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
     return examples
-##########################################################################
-#We have modified the ColaProcessor 
-class TracProcessor(DataProcessor):
-  """Processor for the CoLA data set (GLUE version)."""
 
-  def get_train_examples(self, data_dir):
-    """See base class."""
-    return self._create_examples(
-        self._read_csv(os.path.join(data_dir, "hindi/agr_hi_train.csv")), "train")
-
-  def get_dev_examples(self, data_dir):
-    """See base class."""
-    return self._create_examples(
-        self._read_csv(os.path.join(data_dir, "hindi/agr_hi_dev.csv")), "dev")
-
-  def get_test_examples(self, data_dir):
-    """See base class."""
-    return self._create_examples(
-        self._read_csv(os.path.join(data_dir, "fb_test/hi/agr_hi_fb_gold.csv")), "test")
-
-  def get_labels(self):
-    """See base class."""
-    return ["NAG", "CAG", "OAG"]
-
-  def _create_examples(self, lines, set_type):
-    """Creates examples for the training and dev sets."""
-    examples = []
-    for (i, line) in enumerate(lines):
-      # Only the test set has a header
-      if set_type == "test" and i == 0:
-        continue
-      guid = "%s-%s" % (set_type, i)
-      if set_type == "test":
-        text_a = tokenization.convert_to_unicode(line[1])
-        label = "NAG"
-      else:
-        text_a = tokenization.convert_to_unicode(line[1])
-        label = tokenization.convert_to_unicode(line[2])
-      examples.append(
-          InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
-    return examples
-    
-###############################################################################
 
 class ColaProcessor(DataProcessor):
   """Processor for the CoLA data set (GLUE version)."""
@@ -421,6 +380,46 @@ class ColaProcessor(DataProcessor):
       else:
         text_a = tokenization.convert_to_unicode(line[3])
         label = tokenization.convert_to_unicode(line[1])
+      examples.append(
+          InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
+    return examples
+
+##Modified CoLa Class as TracProcessor
+
+class TracProcessor(DataProcessor):
+  """Processor for the CoLA data set (GLUE version)."""
+
+  def get_train_examples(self, data_dir):
+    """See base class."""
+    return self._create_examples(
+        self._read_csv(os.path.join(data_dir, "agr_en_train.csv")), "train")
+
+  def get_dev_examples(self, data_dir):
+    """See base class."""
+    return self._create_examples(
+        self._read_csv(os.path.join(data_dir, "agr_en_dev.csv")), "dev")
+
+  def get_test_examples(self, data_dir):
+    """See base class."""
+    return self._create_examples(
+        self._read_csv(os.path.join(data_dir, "test.tsv")), "test")
+
+  def get_labels(self):
+    """See base class."""
+    return ["NAG", "CAG", "OAG"]
+
+  def _create_examples(self, lines, set_type):
+    """Creates examples for the training and dev sets."""
+    examples = []
+    for (i, line) in enumerate(lines):
+      # Only the test set has a header
+      guid = "%s-%s" % (set_type, i)
+      if set_type == "test":
+        text_a = tokenization.convert_to_unicode(line[1])
+        label = "NAG"
+      else:
+        text_a = tokenization.convert_to_unicode(line[1])
+        label = tokenization.convert_to_unicode(line[2])
       examples.append(
           InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
     return examples
@@ -840,7 +839,7 @@ def main(_):
       "mnli": MnliProcessor,
       "mrpc": MrpcProcessor,
       "xnli": XnliProcessor,
-      "trac": TracProcessor
+      "trac": TracProcessor,
   }
 
   tokenization.validate_case_matches_checkpoint(FLAGS.do_lower_case,
