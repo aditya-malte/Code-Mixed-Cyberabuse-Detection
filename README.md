@@ -1,5 +1,13 @@
 # BERT
+ 
+ #TODO:
+ 1) Preprocess-remove url, punctuation, invalid characters
+    convert emojis to text using demojize
+    Handle hashtags(#) and usernames (@)
+ 2) Hyperparameter tuning and class_weights(optional)
+ 3) Ensembling-Boosting, Stacking,etc
 
+ 
 **\*\*\*\*\* New February 7th, 2019: TfHub Module \*\*\*\*\***
 
 BERT has been uploaded to [TensorFlow Hub](https://tfhub.dev). See
