@@ -1,7 +1,7 @@
 # BERT
  
  #TODO:
- 1) Preprocess-remove url, punctuation, invalid characters
+ 1) Preprocess-remove url, punctuation,numbers, invalid characters
     ,convert emojis to text using demojize
     ,handle hashtags(#) and usernames (@)
  2) Hyperparameter tuning and class_weights(optional)
