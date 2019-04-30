@@ -2,8 +2,8 @@
  
  #TODO:
  1) Preprocess-remove url, punctuation, invalid characters
-    convert emojis to text using demojize
-    Handle hashtags(#) and usernames (@)
+    ,convert emojis to text using demojize
+    ,handle hashtags(#) and usernames (@)
  2) Hyperparameter tuning and class_weights(optional)
  3) Ensembling-Boosting, Stacking,etc
 
