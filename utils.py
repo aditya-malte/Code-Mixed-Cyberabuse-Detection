@@ -29,7 +29,7 @@ def preprocess(text):
     #spell checking
     
     #lowercase
-    processed_text = processed_text.lower()
+    #processed_text = processed_text.lower()
     
     #convert multiple whitespaces to single
     #detect newline and replace with random string
