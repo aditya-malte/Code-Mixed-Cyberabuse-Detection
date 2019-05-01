@@ -6,6 +6,7 @@
     ,handle hashtags(#) and usernames (@)
  2) Hyperparameter tuning and class_weights(optional)
  3) Ensembling-Boosting, Stacking,etc
+ 4) Find a way to plot loss and f1 per step and epoch while training
 
  
 **\*\*\*\*\* New February 7th, 2019: TfHub Module \*\*\*\*\***
