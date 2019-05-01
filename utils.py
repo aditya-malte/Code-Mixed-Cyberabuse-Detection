@@ -36,6 +36,7 @@ def preprocess(text):
     processed_text = processed_text.replace("\n", "QSDWDSrfefafawecsd")
     
     processed_text = re.sub("\s\s+", " ", processed_text)
+    
     #replace again with newline
     processed_text = processed_text.replace("QSDWDSrfefafawecsd", "\n")
     
