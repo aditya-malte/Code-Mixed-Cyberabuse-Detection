@@ -1,9 +1,7 @@
 import re
 import string
 
-
 def preprocess(text):
-    
     #remove urls
     processed_text = re.sub("http\S+", "", text, flags=re.MULTILINE)
     
@@ -21,7 +19,7 @@ def preprocess(text):
             
     #tokenize punctuations
     for punctuation in string.punctuation:
-        processed_text =  processed_text.replace(punctuation, " " + punctuation)
+        processed_text =  processed_text.replace(punctuation, " " + punctuation+ " ")
         
     #remove numbers
     processed_text = re.sub("\d+", "", processed_text)
@@ -33,8 +31,10 @@ def preprocess(text):
     #lowercase
     processed_text = processed_text.lower()
     
+    #convert multiple whitespaces to single
+    processed_text = re.sub("\s\s+", " ", processed_text)
     return processed_text
 
 
-print(preprocess("CHECK out this123!!! u`??rl https://stackoverflow.com/questions/11331982/how-to-remove-any-url-within-a-string-in-python my car another urlhttps://codereview.stackexchange.com/questions/186614/text-cleaning-script-producing-lowercase-words-with-minimal-punctuation"))
-print(preprocess("Check out this #url!!???"))
+print(preprocess("CHECK @out this123!!! u`??rl https://stackoverflow.com/questions/11331982/how-to-remove-any-url-within-a-string-in-python my car another urlhttps://codereview.stackexchange.com/questions/186614/text-cleaning-script-producing-lowercase-words-with-minimal-punctuation"))
+print(preprocess("Check out this #url!!  ???"))
