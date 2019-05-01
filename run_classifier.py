@@ -26,6 +26,7 @@ import optimization
 import tokenization
 import tensorflow as tf
 from sklearn.metrics import confusion_matrix
+from utils import preprocess
 
 flags = tf.flags
 
@@ -415,11 +416,12 @@ class TracProcessor(DataProcessor):
       # Only the test set has a header
       guid = "%s-%s" % (set_type, i)
       if set_type == "test":
-        text_a = tokenization.convert_to_unicode(line[1])
+        text_a = tokenization.convert_to_unicode(preprocess(line[1]))
         label = "NAG"
       else:
-        text_a = tokenization.convert_to_unicode(line[1])
+        text_a = tokenization.convert_to_unicode(preprocess(line[1]))
         label = tokenization.convert_to_unicode(line[2])
+      print(text_a)
       examples.append(
           InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
     return examples
