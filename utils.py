@@ -32,5 +32,5 @@ def preprocess(text):
     return processed_text
 
 
-print(preprocess("Check out this @#url https://stackoverflow.com/questions/11331982/how-to-remove-any-url-within-a-string-in-python my car another urlhttps://codereview.stackexchange.com/questions/186614/text-cleaning-script-producing-lowercase-words-with-minimal-punctuation"))
+print(preprocess("Check out this123 @#url https://stackoverflow.com/questions/11331982/how-to-remove-any-url-within-a-string-in-python my car another urlhttps://codereview.stackexchange.com/questions/186614/text-cleaning-script-producing-lowercase-words-with-minimal-punctuation"))
 print(preprocess("Check out this @#url https://stackoverflow.com/questions/11331982/how-to-remove-any-url-within-a-string-in-pyth"))
