@@ -32,9 +32,12 @@ def preprocess(text):
     processed_text = processed_text.lower()
     
     #convert multiple whitespaces to single
+    processed_text = processed_text.replace("\n", "QSDWDSrfefafawecsd")
     processed_text = re.sub("\s\s+", " ", processed_text)
+    processed_text = processed_text.replace("QSDWDSrfefafawecsd", "\n")
+    
     return processed_text
 
 
-print(preprocess("CHECK @out this123!!! u`??rl https://stackoverflow.com/questions/11331982/how-to-remove-any-url-within-a-string-in-python my car another urlhttps://codereview.stackexchange.com/questions/186614/text-cleaning-script-producing-lowercase-words-with-minimal-punctuation"))
+print(preprocess("CHECK @out this123!!! \n u`??rl https://stackoverflow.com/questions/11331982/how-to-remove-any-url-within-a-string-in-python my car another urlhttps://codereview.stackexchange.com/questions/186614/text-cleaning-script-producing-lowercase-words-with-minimal-punctuation"))
 print(preprocess("Check out this #url!!  ???"))
