@@ -18,18 +18,16 @@ def preprocess(text):
             processed_text = replaced
             
     #tokenize punctuations
+    """
     for punctuation in string.punctuation:
         processed_text =  processed_text.replace(punctuation, " " + punctuation+ " ")
-        
+    """ 
     #remove numbers
     processed_text = re.sub("\d+", "", processed_text)
     
     #convert emojis
     
     #spell checking
-    
-    #lowercase
-    #processed_text = processed_text.lower()
     
     #convert multiple whitespaces to single
     #detect newline and replace with random string
@@ -44,4 +42,4 @@ def preprocess(text):
 
 
 print(preprocess("CHECK @out this123!!! \n u`??rl https://stackoverflow.com/questions/11331982/how-to-remove-any-url-within-a-string-in-python my car another urlhttps://codereview.stackexchange.com/questions/186614/text-cleaning-script-producing-lowercase-words-with-minimal-punctuation"))
-print(preprocess("Check out this #url!!  ???"))
+print(preprocess("Check out this #url!!???"))
