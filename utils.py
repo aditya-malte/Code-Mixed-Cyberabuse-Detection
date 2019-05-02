@@ -5,9 +5,13 @@ def preprocess(text):
     #remove urls
     processed_text = re.sub("http\S+", "", text, flags=re.MULTILINE)
     
+    
+    
     #handle hashtags and usernames
     processed_text = re.sub("#", "", processed_text)
     processed_text = re.sub("@", "", processed_text)
+    
+    
     
     #remove repeated punctuations
     for punctuation in string.punctuation:
@@ -17,24 +21,32 @@ def preprocess(text):
                 break
             processed_text = replaced
             
+    
+    
     #tokenize punctuations
     """
     for punctuation in string.punctuation:
         processed_text =  processed_text.replace(punctuation, " " + punctuation+ " ")
     """ 
+    
+    
     #remove numbers
     processed_text = re.sub("\d+", "", processed_text)
     
+    
+    
     #convert emojis
     
+    
+    
     #spell checking
+    
+    
     
     #convert multiple whitespaces to single
     #detect newline and replace with random string
     processed_text = processed_text.replace("\n", "QSDWDSrfefafawecsd")
-    
     processed_text = re.sub("\s\s+", " ", processed_text)
-    
     #replace again with newline
     processed_text = processed_text.replace("QSDWDSrfefafawecsd", "\n")
     

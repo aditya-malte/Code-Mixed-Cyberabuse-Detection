@@ -726,12 +726,17 @@ def model_fn_builder(bert_config, num_labels, init_checkpoint, learning_rate,
 
       train_op = optimization.create_optimizer(
           total_loss, learning_rate, num_train_steps, num_warmup_steps, use_tpu)
-
+      logging_hook=tf.train.LoggingTensorHook({"loss":total_loss},every_n_iter=10)
+      summary_hook = tf.train.SummarySaverHook(save_steps=10,output_dir=FLAGS.output_dir,
+    summary_op=tf.summary.scalar('minibatch_loss',total_loss))
+      
+      
       output_spec = tf.contrib.tpu.TPUEstimatorSpec(
           mode=mode,
           loss=total_loss,
           train_op=train_op,
-          scaffold_fn=scaffold_fn)
+          scaffold_fn=scaffold_fn,
+          training_hooks=[logging_hook,summary_hook])
     elif mode == tf.estimator.ModeKeys.EVAL:
 
       def metric_fn(per_example_loss, label_ids, logits, is_real_example):
