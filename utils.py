@@ -1,6 +1,6 @@
 import re
 import string
-
+import emoji 
 def preprocess(text):
     #remove urls
     processed_text = re.sub("http\S+", "", text, flags=re.MULTILINE)
@@ -36,7 +36,7 @@ def preprocess(text):
     
     
     #convert emojis
-    
+    processed_text = emoji.demojize(processed_text)
     
     
     #spell checking
@@ -53,5 +53,5 @@ def preprocess(text):
     return processed_text
 
 
-print(preprocess("CHECK @out this123!!! \n u`??rl https://stackoverflow.com/questions/11331982/how-to-remove-any-url-within-a-string-in-python my car another urlhttps://codereview.stackexchange.com/questions/186614/text-cleaning-script-producing-lowercase-words-with-minimal-punctuation"))
+print(preprocess("CHECK @out this123!!! \n u`??rl https://stackoverflow.com/questions/11331982/how-to-remove-any-url-within-a-string-in-python my car another 😅urlhttps://codereview.stackexchange.com/questions/186614/text-cleaning-script-producing-lowercase-words-with-minimal-punctuation"))
 print(preprocess("Check out this #url!!???"))

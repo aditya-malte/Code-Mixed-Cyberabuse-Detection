@@ -421,7 +421,6 @@ class TracProcessor(DataProcessor):
       else:
         text_a = tokenization.convert_to_unicode(preprocess(line[1]))
         label = tokenization.convert_to_unicode(line[2])
-      print(text_a)
       examples.append(
           InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
     return examples
