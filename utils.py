@@ -57,6 +57,7 @@ def preprocess(text):
         translator = Translator()
         processed_text = translator.translate(processed_text, dest='hi').text
     except Exception:
+        print(processed_text)
         translator = Translator()
         processed_text = translator.translate(processed_text, dest='hi').text
     print(processed_text)
