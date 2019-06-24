@@ -2,13 +2,14 @@ import re
 import string
 from googletrans import Translator
 import emoji 
-translator = Translator()
     
 def preprocess(text):
     #remove urls
     processed_text = re.sub("http\S+", "", text, flags=re.MULTILINE)
     
+
     #convert to devanagiri
+    translator = Translator()
     processed_text = translator.translate(processed_text, dest='hi').text
 
     
