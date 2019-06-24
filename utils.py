@@ -51,7 +51,7 @@ def preprocess(text):
     #replace again with newline
     processed_text = processed_text.replace("QSDWDSrfefafawecsd", "\n")
     
-    
+    """
     #convert to devanagiri
     try:
         translator = Translator()
@@ -61,6 +61,8 @@ def preprocess(text):
         translator = Translator()
         processed_text = translator.translate(processed_text, dest='hi').text
     print(processed_text)
+    """
+    
     return processed_text
 
 
