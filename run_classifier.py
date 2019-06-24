@@ -393,6 +393,46 @@ class TracProcessor(DataProcessor):
   def get_train_examples(self, data_dir):
     """See base class."""
     return self._create_examples(
+        self._read_csv(os.path.join(data_dir, "agr_en_train.csv")), "train")
+
+  def get_dev_examples(self, data_dir):
+    """See base class."""
+    return self._create_examples(
+        self._read_csv(os.path.join(data_dir, "agr_en_dev.csv")), "dev")
+
+  def get_test_examples(self, data_dir):
+    """See base class."""
+    return self._create_examples(
+        self._read_csv(os.path.join(data_dir, "test.tsv")), "test")
+
+  def get_labels(self):
+    """See base class."""
+    return ["NAG", "CAG", "OAG"]
+
+  def _create_examples(self, lines, set_type):
+    """Creates examples for the training and dev sets."""
+    examples = []
+    for (i, line) in enumerate(lines):
+      # Only the test set has a header
+      guid = "%s-%s" % (set_type, i)
+      if set_type == "test":
+        text_a = tokenization.convert_to_unicode(preprocess(line[1]))
+        label = "NAG"
+      else:
+        text_a = tokenization.convert_to_unicode(preprocess(line[1]))
+        label = tokenization.convert_to_unicode(line[2])
+      examples.append(
+          InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
+    return examples
+
+
+
+class HindiTracProcessor(DataProcessor):
+  """Processor for the CoLA data set (GLUE version)."""
+
+  def get_train_examples(self, data_dir):
+    """See base class."""
+    return self._create_examples(
         self._read_csv(os.path.join(data_dir, "agr_hi_train.csv")), "train")
 
   def get_dev_examples(self, data_dir):
@@ -846,6 +886,7 @@ def main(_):
       "mrpc": MrpcProcessor,
       "xnli": XnliProcessor,
       "trac": TracProcessor,
+      "hinditrac":HindiTracProcessor
   }
 
   tokenization.validate_case_matches_checkpoint(FLAGS.do_lower_case,
