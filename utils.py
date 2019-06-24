@@ -6,13 +6,8 @@ import emoji
 def preprocess(text):
     #remove urls
     processed_text = re.sub("http\S+", "", text, flags=re.MULTILINE)
-    
+   
 
-    #convert to devanagiri
-    translator = Translator()
-    processed_text = translator.translate(processed_text, dest='hi').text
-
-    
     #handle hashtags and usernames
     processed_text = re.sub("#", "", processed_text)
     processed_text = re.sub("@", "", processed_text)
@@ -55,6 +50,11 @@ def preprocess(text):
     processed_text = re.sub("\s\s+", " ", processed_text)
     #replace again with newline
     processed_text = processed_text.replace("QSDWDSrfefafawecsd", "\n")
+    
+    #convert to devanagiri
+    translator = Translator()
+    processed_text = translator.translate(processed_text, dest='hi').text
+
     
     return processed_text
 
