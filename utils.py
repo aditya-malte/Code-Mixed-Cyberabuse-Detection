@@ -51,10 +51,14 @@ def preprocess(text):
     #replace again with newline
     processed_text = processed_text.replace("QSDWDSrfefafawecsd", "\n")
     
+    
     #convert to devanagiri
-    translator = Translator()
-    processed_text = translator.translate(processed_text, dest='hi').text
-
+    try:
+        translator = Translator()
+        processed_text = translator.translate(processed_text, dest='hi').text
+    except Exception:
+        translator = Translator()
+        processed_text = translator.translate(processed_text, dest='hi').text
     print(processed_text)
     return processed_text
 
