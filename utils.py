@@ -1,11 +1,16 @@
 import re
 import string
+from googletrans import Translator
 import emoji 
+translator = Translator()
+    
 def preprocess(text):
     #remove urls
     processed_text = re.sub("http\S+", "", text, flags=re.MULTILINE)
     
-    
+    #convert to devanagiri
+    processed_text = translator.translate(processed_text, dest='hi').text
+
     
     #handle hashtags and usernames
     processed_text = re.sub("#", "", processed_text)
