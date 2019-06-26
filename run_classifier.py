@@ -417,7 +417,7 @@ class TracProcessor(DataProcessor):
       guid = "%s-%s" % (set_type, i)
       if set_type == "test":
         text_a = tokenization.convert_to_unicode(preprocess(line[1]))
-        label = "NAG"
+        label =  tokenization.convert_to_unicode(line[2])
       else:
         text_a = tokenization.convert_to_unicode(preprocess(line[1]))
         label = tokenization.convert_to_unicode(line[2])
@@ -457,7 +457,7 @@ class HindiTracProcessor(DataProcessor):
       guid = "%s-%s" % (set_type, i)
       if set_type == "test":
         text_a = tokenization.convert_to_unicode(preprocess(line[1]))
-        label = "NAG"
+        label = tokenization.convert_to_unicode(line[2])
       else:
         text_a = tokenization.convert_to_unicode(preprocess(line[1]))
         label = tokenization.convert_to_unicode(line[2])
