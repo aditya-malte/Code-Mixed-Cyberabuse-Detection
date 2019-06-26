@@ -443,7 +443,7 @@ class HindiTracProcessor(DataProcessor):
   def get_test_examples(self, data_dir):
     """See base class."""
     return self._create_examples(
-        self._read_csv(os.path.join(data_dir, "test.tsv")), "test")
+        self._read_csv(os.path.join(data_dir, "modified_test_fb.csv")), "test")
 
   def get_labels(self):
     """See base class."""
