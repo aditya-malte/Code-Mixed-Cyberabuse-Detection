@@ -403,7 +403,7 @@ class TracProcessor(DataProcessor):
   def get_test_examples(self, data_dir):
     """See base class."""
     return self._create_examples(
-        self._read_csv(os.path.join(data_dir, "agr_en_fb_gold.csv")), "test")
+        self._read_csv(os.path.join(data_dir, "agr_en_tw_gold.csv")), "test")
 
   def get_labels(self):
     """See base class."""
