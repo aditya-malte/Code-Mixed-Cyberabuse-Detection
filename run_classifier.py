@@ -152,7 +152,7 @@ class PaddingInputExample(object):
 
   When running eval/predict on the TPU, we need to pad the number of examples
   to be a multiple of the batch size, because the TPU requires a fixed batch
-  size. The alternative is to drop the last batch, which is bad because it means
+  size. The alternative izs to drop the last batch, which is bad because it means
   the entire output data won't be generated.
 
   We use this class instead of `None` because treating `None` as padding
@@ -444,6 +444,45 @@ class HindiTracProcessor(DataProcessor):
     """See base class."""
     return self._create_examples(
         self._read_csv(os.path.join(data_dir, "modified_test_fb.csv")), "test")
+
+  def get_labels(self):
+    """See base class."""
+    return ["NAG", "CAG", "OAG"]
+
+  def _create_examples(self, lines, set_type):
+    """Creates examples for the training and dev sets."""
+    examples = []
+    for (i, line) in enumerate(lines):
+      # Only the test set has a header
+      guid = "%s-%s" % (set_type, i)
+      if set_type == "test":
+        text_a = tokenization.convert_to_unicode(preprocess(line[1]))
+        label = tokenization.convert_to_unicode(line[2])
+      else:
+        text_a = tokenization.convert_to_unicode(preprocess(line[1]))
+        label = tokenization.convert_to_unicode(line[2])
+      examples.append(
+          InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
+    return examples
+
+
+class HinglishTracProcessor(DataProcessor):
+  """Processor for the CoLA data set (GLUE version)."""
+
+  def get_train_examples(self, data_dir):
+    """See base class."""
+    return self._create_examples(
+        self._read_csv(os.path.join(data_dir, "original_train.csv")), "train")
+
+  def get_dev_examples(self, data_dir):
+    """See base class."""
+    return self._create_examples(
+        self._read_csv(os.path.join(data_dir, "original_dev.csv")), "dev")
+
+  def get_test_examples(self, data_dir):
+    """See base class."""
+    return self._create_examples(
+        self._read_csv(os.path.join(data_dir, "agr_hi_en_fb_gold.csv")), "test")
 
   def get_labels(self):
     """See base class."""
@@ -886,7 +925,8 @@ def main(_):
       "mrpc": MrpcProcessor,
       "xnli": XnliProcessor,
       "trac": TracProcessor,
-      "hinditrac":HindiTracProcessor
+      "hinditrac":HindiTracProcessor,
+      "hinglishtrac":HinglishTracProcessor
   }
 
   tokenization.validate_case_matches_checkpoint(FLAGS.do_lower_case,
