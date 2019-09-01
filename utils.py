@@ -62,7 +62,7 @@ def preprocess(text):
     print(processed_text)
     """
     
-    return processed_text
+    return processed_text.lower()
 
 
 print(preprocess("CHECK @out this123!!! \n u`??rl https://stackoverflow.com/questions/11331982/how-to-remove-any-url-within-a-string-in-python my car another 😅urlhttps://codereview.stackexchange.com/questions/186614/text-cleaning-script-producing-lowercase-words-with-minimal-punctuation"))
