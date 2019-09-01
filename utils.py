@@ -1,6 +1,5 @@
 import re
 import string
-from googletrans import Translator
 import emoji 
     
 def preprocess(text):
