@@ -10,5 +10,8 @@ IEEE TENCON 2019
 ### Preprocessing: demojization, transliteration, normalization and so on.
 
 ### Results:
-### 1) State-of-the-art performance on Hindi dataset
-### 2) Excellent performance (top-5) on English dataset
+  1) State-of-the-art performance on Hindi dataset
+  2) Excellent performance (top-5) on English dataset
+
+### Note:
+Colaboratory Notebooks to be added soon
